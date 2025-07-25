@@ -1,36 +1,32 @@
 ---
-title: Welcome to Starlight
+title: Bienvenido a DataHub
 description: Get started building your docs site with Starlight.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Apuntes de Machine Learning, Data Science y Desarrollo de Software. Todo en un solo lugar
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/oso_head.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Explora las notas
+      link: /deeplearning/example/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Topicos
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Analisis de Datos" icon="document">
+		Fundamentos de analisis de datos, estadistica, visualizacion de datos, etc.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Machine Learning" icon="puzzle">
+		Fundamentos de machine learning, algoritmos, etc.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Desarrollo de Software" icon="open-book">
+		Patrones de diseño y arquitectura.
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="MLops" icon="seti:docker">
+		Docker, DVC y MLFlow
 	</Card>
 </CardGrid>
