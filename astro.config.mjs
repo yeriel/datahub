@@ -5,11 +5,11 @@ import catppuccin from "@catppuccin/starlight";
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://yeriel.github.io',
+	base: 'datahub',
 	integrations: [
 		starlight({
 			title: 'DataHub',
-			site: 'https://yeriel.github.io',
-			base: 'datahub',
 			locales: {
 			   root: {
 					 label: 'Español',
