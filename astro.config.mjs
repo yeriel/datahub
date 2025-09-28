@@ -10,6 +10,11 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'DataHub',
+			favicon: './src/assets/oso_favicon.svg',
+			logo: {
+				src: './src/assets/oso_head.webp',
+				alt: 'Logo'
+			},
 			locales: {
 			   root: {
 					 label: 'Español',
@@ -20,27 +25,25 @@ export default defineConfig({
 				{
 					icon: 'github', 
 					label: 'GitHub', 
-					href: 'https://github.com/yeriel' 
-				},
-				{
-					icon: 'linkedin', 
-					label: 'Linkedin', 
-					href: 'https://linkedin.com/in/yeriel-paz' 
-				},
+					href: 'https://github.com/yeriel/datahub' 
+				}
 				
 			],
 			plugins: [
 				catppuccin({
-					dark: { flavor: "macchiato", accent: "sky" },
-          			light: { flavor: "latte", accent: "sky" }
+					dark: { flavor: "macchiato", accent: "mauve" },
+          			light: { flavor: "latte", accent: "mauve" }
 				})
 			],
 			sidebar: [
 				{
-					label: 'Deep Learning',
-					autogenerate: { directory: 'deeplearning' },
+					label: '¿Qué es DataHub?',
+					link: '/datahub'
 				},
-
+				{
+					label: 'Machine Learning',
+					autogenerate: { directory: 'machine_learning' },
+				}
 			],
 		}),
 	],
