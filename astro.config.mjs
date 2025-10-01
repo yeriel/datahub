@@ -10,9 +10,9 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'DataHub',
-			favicon: './src/assets/oso_favicon.svg',
+			favicon: './src/assets/oso/oso_favicon.svg',
 			logo: {
-				src: './src/assets/oso_head.webp',
+				src: './src/assets/oso/oso_head.webp',
 				alt: 'Logo'
 			},
 			locales: {
@@ -48,4 +48,3 @@ export default defineConfig({
 		}),
 	],
 });
-
