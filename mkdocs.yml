@@ -1,0 +1,87 @@
+# ==========================================
+# 1. INFORMACIÓN GENERAL DEL SITIO
+# ==========================================
+site_name: DataHub
+site_description: "Aprende Machine Learning, MLOps y Análisis de Datos en español. Un repositorio técnico con fundamentos de Python, Matemáticas y Estadística, desde la teoría hasta el despliegue en producción."
+site_author: Yeriel Paz Ureta
+
+# ==========================================
+# 2. CONFIGURACIÓN DEL TEMA (Material)
+# ==========================================
+theme:
+  name: material
+  language: es
+  
+  # Identidad Visual: Colores y Modos (Claro/Oscuro)
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Pasar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Pasar a modo claro
+
+  # Funcionalidades de Interfaz y Navegación
+  features:
+    - content.code.copy      # Botón para copiar bloques de código
+    - content.code.annotate  # Permite poner explicaciones dentro del código
+    - content.tabs.link      # Sincroniza pestañas del mismo nombre
+    - navigation.path        # Breadcrumbs (Guía de migas de pan) en la parte superior
+    - navigation.sections    # Agrupación visual clara en el menú lateral
+    - navigation.indexes     # Los nombres de carpetas pueden ser enlaces directos
+    - navigation.top         # Añade un botón de "Volver arriba" al hacer scroll
+    - search.highlight       # Resalta las palabras buscadas
+    - search.share           # Permite compartir enlaces de búsqueda
+
+# ==========================================
+# 3. EXTENSIONES DE MARKDOWN (Funciones extra)
+# ==========================================
+markdown_extensions:
+  # --- Matemáticas ---
+  - pymdownx.arithmatex:
+      generic: true
+
+  # --- Código y Bloques ---
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite    # Código en la misma línea
+  - pymdownx.snippets        # Insertar fragmentos de otros archivos
+  - pymdownx.superfences:    # Necesario para Mermaid y bloques complejos
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  # --- Elementos de Interfaz ---
+  - admonition               # Cajas de aviso (Info, Danger, etc.)
+  - pymdownx.details         # Bloques colapsables (Acordeones)
+  - pymdownx.tabbed:         # Pestañas de contenido
+      alternate_style: true
+  - pymdownx.tasklist:       # Listas de tareas interactivas
+      custom_checkbox: true
+
+# ==========================================
+# 4. RECURSOS EXTERNOS (Scripts y Estilos)
+# ==========================================
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+
+# ==========================================
+# 5. ESTRUCTURA DE NAVEGACIÓN (Siguiente paso)
+# ==========================================
+# Puedes empezar a añadir aquí abajo tus carpetas y archivos.
+# Recuerda respetar la indentación de dos espacios.
+nav:
+  - DataHub: index.md
+  # - Ejemplo Carpeta:
+  #     - Subtema: carpeta/archivo.md
