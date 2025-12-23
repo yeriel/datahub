@@ -1,0 +1,29 @@
+/* Forzar que el contenedor no limite el tamaño */
+.md-header__button.md-logo {
+    width: 64px !important;  /* Ajusta este ancho según necesites */
+    height: 64px !important; /* Ajusta este alto según necesites */
+    margin-right: 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Escalar la imagen directamente */
+.md-header__button.md-logo img {
+    height: 180% !important; /* Supera el 100% para compensar bordes transparentes */
+    width: auto !important;
+    max-height: none !important; /* Elimina restricciones del tema Material */
+    transform: scale(1.5);      /* Aumenta visualmente el tamaño un 50% extra */
+    object-fit: contain;
+}
+
+/* Eliminar el texto DataHub de raíz */
+.md-header__title {
+    display: flex !important;
+}
+
+.md-header__title .md-ellipsis {
+    visibility: hidden; /* Mantiene el espacio pero oculta el texto */
+    width: 0;
+    margin: 0;
+}
