@@ -130,7 +130,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mkdocs-material", extras = ["social"], specifier = ">=9.7.1" },
+    { name = "mkdocs-material", specifier = ">=9.7.1" },
     { name = "mkdocs-minify-plugin", specifier = ">=0.8.0" },
     { name = "pymdown-extensions", specifier = ">=10.19.1" },
 ]
