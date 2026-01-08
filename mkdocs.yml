@@ -59,9 +59,10 @@ theme:
 # ==========================================
 plugins:
   - search                   # Buscador integrado
+  - awesome-nav
   - minify:
       minify_html: true
-      minify_js: true
+      minify_js: true     
       minify_css: true
       cache_safe: true
 
@@ -109,9 +110,3 @@ extra_javascript:
 
 extra_css:
   - stylesheets/extra.css
-
-# ==========================================
-# 6. ESTRUCTURA DE NAVEGACIÓN
-# ==========================================
-nav:
-  - DataHub: index.md
