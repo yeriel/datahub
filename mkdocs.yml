@@ -33,7 +33,7 @@ theme:
         name: Pasar a modo oscuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
+      primary: black
       accent: indigo
       toggle:
         icon: material/brightness-4
