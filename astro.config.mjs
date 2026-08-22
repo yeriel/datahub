@@ -9,7 +9,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE || "https://yeriel.github.io",
+  site: process.env.SITE || "https://yeriel.github.io/datahub/",
   base: process.env.BASE_PATH || undefined,
   prefetch: true,
   vite: {
