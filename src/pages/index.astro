@@ -4,42 +4,34 @@ import { Icon } from "astro-icon/components";
 import { Button } from "@/components/ui/button";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const HERO_TITLE = "CelestialDocs";
-const HERO_SUBTITLE =
-  "A modern, type-safe documentation system with hierarchical navigation, hybrid generation, and multi-collection support.";
-const CTA_PRIMARY = { href: "/docs/introduction", label: "View Documentation" };
-const CTA_SECONDARY = {
-  href: "https://github.com/HYP3R00T/CelestialDocs",
-  label: "View on GitHub",
-};
+const HERO_TITLE = "DataHub";
+const HERO_SUBTITLE = "Tu base de conocimiento personal: notas, guías, documentación y proyectos en un solo lugar.";
+const CTA_PRIMARY = { href: "/docs/introduction", label: "Explorar Conocimiento" };
 ---
 
 <BaseLayout
-  title={`${HERO_TITLE} - Modern documentation template`}
+  title={`${HERO_TITLE} - Gestión de Conocimiento`}
   description={HERO_SUBTITLE}
   image="/docs-hero.jpg"
-  imageAlt="CelestialDocs documentation template hero"
+  imageAlt="DataHub - Gestión de Conocimiento"
 >
   <!-- Hero Section -->
-  <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
+  <section class="mx-auto max-w-6xl px-5 py-12 sm:py-16 text-center">
     <div class="space-y-8">
       <div class="space-y-4">
         <h1 class="text-foreground text-5xl leading-tight font-bold tracking-tight sm:text-6xl lg:text-7xl">
           {HERO_TITLE}
         </h1>
         <p class="text-muted-foreground mx-auto max-w-2xl text-xl">
-          Modern documentation that scales with your project
+          {HERO_SUBTITLE}
         </p>
       </div>
 
       <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Button size="lg">
-          <a href={CTA_PRIMARY.href}>Get Started</a>
-        </Button>
-        <Button size="lg" variant="secondary">
-          <a href={CTA_SECONDARY.href} target="_blank" class="flex flex-row items-center gap-3">
-            View on GitHub
-            <Icon name="github" />
+          <a href={CTA_PRIMARY.href} class="flex items-center gap-2">
+            <span>{CTA_PRIMARY.label}</span>
+            <Icon name="right" class="size-4" />
           </a>
         </Button>
       </div>
@@ -49,49 +41,60 @@ const CTA_SECONDARY = {
   <!-- Features Section -->
   <section class="mx-auto max-w-6xl px-5 py-8 sm:py-12">
     <div class="mb-12 text-center">
-      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Everything you need</h2>
-      <p class="text-muted-foreground mt-3 text-lg">Built with best practices and developer experience in mind</p>
+      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Estructura y Capacidades</h2>
+      <p class="text-muted-foreground mt-3 text-lg">
+        Diseñado para escribir rápido, organizar sin fricción y acceder al instante.
+      </p>
     </div>
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="bg-popover space-y-3 rounded-lg p-6">
-        <div class="text-3xl">🧭</div>
-        <h3 class="text-foreground text-lg font-semibold">Smart Navigation</h3>
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
+        <div class="text-3xl">🔍</div>
+        <h3 class="text-foreground text-lg font-semibold">Búsqueda Instantánea</h3>
         <p class="text-muted-foreground text-sm">
-          Hierarchical structure with tabs, groups, and breadcrumbs keeps users oriented
+          Encuentra cualquier nota o sección rápidamente presionando
+          <kbd class="px-1.5 py-0.5 text-xs bg-muted rounded border">Ctrl/Cmd + K</kbd>.
         </p>
       </div>
 
-      <div class="bg-popover space-y-3 rounded-lg p-6">
-        <div class="text-3xl">⚡</div>
-        <h3 class="text-foreground text-lg font-semibold">Fast Setup</h3>
-        <p class="text-muted-foreground text-sm">Auto-generate or configure manually, your choice</p>
-      </div>
-
-      <div class="bg-popover space-y-3 rounded-lg p-6">
-        <div class="text-3xl">🔒</div>
-        <h3 class="text-foreground text-lg font-semibold">Type Safe</h3>
-        <p class="text-muted-foreground text-sm">Strict TypeScript and Zod validation catch errors before deployment</p>
-      </div>
-
-      <div class="bg-popover space-y-3 rounded-lg p-6">
-        <div class="text-3xl">🗂️</div>
-        <h3 class="text-foreground text-lg font-semibold">Multi-Collection</h3>
-        <p class="text-muted-foreground text-sm">
-          Separate docs, guides, and API references with independent navigation
-        </p>
-      </div>
-
-      <div class="bg-popover space-y-3 rounded-lg p-6">
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
         <div class="text-3xl">📝</div>
-        <h3 class="text-foreground text-lg font-semibold">MDX Support</h3>
-        <p class="text-muted-foreground text-sm">Write in Markdown with the power of React components</p>
+        <h3 class="text-foreground text-lg font-semibold">Markdown y MDX</h3>
+        <p class="text-muted-foreground text-sm">
+          Escribe tus apuntes en Markdown estándar con soporte completo para componentes interactivos MDX.
+        </p>
       </div>
 
-      <div class="bg-popover space-y-3 rounded-lg p-6">
-        <div class="text-3xl">🎨</div>
-        <h3 class="text-foreground text-lg font-semibold">Beautiful UI</h3>
-        <p class="text-muted-foreground text-sm">Dark mode, responsive design, and accessible by default</p>
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
+        <div class="text-3xl">🗂️</div>
+        <h3 class="text-foreground text-lg font-semibold">Organización Modular</h3>
+        <p class="text-muted-foreground text-sm">
+          Estructura jerárquica con categorías, pestañas y tabla de contenidos generada automáticamente.
+        </p>
+      </div>
+
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
+        <div class="text-3xl">⚡</div>
+        <h3 class="text-foreground text-lg font-semibold">Rendimiento Extremo</h3>
+        <p class="text-muted-foreground text-sm">
+          Sitio 100% estático generado con Astro, ultra ligero y optimizado para una carga inmediata.
+        </p>
+      </div>
+
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
+        <div class="text-3xl">🌙</div>
+        <h3 class="text-foreground text-lg font-semibold">Tema Oscuro / Claro</h3>
+        <p class="text-muted-foreground text-sm">
+          Soporte nativo para temas claro y oscuro con cambio de ancho de lectura adaptable.
+        </p>
+      </div>
+
+      <div class="bg-popover space-y-3 rounded-lg p-6 border border-border">
+        <div class="text-3xl">🚀</div>
+        <h3 class="text-foreground text-lg font-semibold">Deploy en GitHub Pages</h3>
+        <p class="text-muted-foreground text-sm">
+          Publicación automática y continua en cada push a través de GitHub Actions.
+        </p>
       </div>
     </div>
   </section>
@@ -99,19 +102,13 @@ const CTA_SECONDARY = {
   <!-- CTA Section -->
   <section class="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
     <div class="mb-4 text-center">
-      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Ready to get started?</h2>
-      <p class="text-muted-foreground mt-3 text-lg">Explore the documentation or try the live demo</p>
+      <h2 class="text-foreground pb-4 text-3xl font-bold sm:text-4xl">Comienza a organizar tus notas</h2>
+      <p class="text-muted-foreground mt-3 text-lg">Accede directamente al contenido para ver o editar tus notas.</p>
     </div>
     <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
       <Button size="lg" variant="secondary">
         <a href="/docs/introduction" class="flex flex-row items-center gap-3">
-          Read the Docs
-          <Icon name="right" />
-        </a>
-      </Button>
-      <Button size="lg" variant="secondary">
-        <a href="/funnydocs" class="flex flex-row items-center gap-3">
-          View Demo
+          Entrar a la Documentación
           <Icon name="right" />
         </a>
       </Button>

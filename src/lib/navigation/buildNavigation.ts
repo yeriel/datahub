@@ -18,11 +18,13 @@ export async function buildNavigation(
   collectionId?: string,
 ): Promise<NavigationResult> {
   const key = collectionId ?? "docs";
-  const effectiveConfig = config[key];
-
-  if (!effectiveConfig) {
-    throw new Error(`Sidebar configuration not found for collection: ${key}`);
-  }
+  const effectiveConfig = config[key] ?? {
+    defaultTab: {
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      icon: "📁",
+    },
+    groups: [],
+  };
 
   const allDocs = collectionId ? await getCollectionFromFilesystem(collectionId) : await getDocsFromFilesystem();
   const filesystemStructure = buildFilesystemStructure(allDocs);

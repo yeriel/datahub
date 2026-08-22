@@ -23,11 +23,18 @@ export function CommandPalette() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const fuseRef = React.useRef<Fuse<SearchItem> | null>(null);
 
-  // Filter states (inverted logic: OFF = show all, ON = filter)
-  const [filterDocs, setFilterDocs] = React.useState(false);
-  const [filterFunnydocs, setFilterFunnydocs] = React.useState(false);
+  // Dynamic collection filters
+  const [selectedCollections, setSelectedCollections] = React.useState<string[]>([]);
+
+  // Type filter states
   const [filterPages, setFilterPages] = React.useState(false);
   const [filterHeadings, setFilterHeadings] = React.useState(false);
+
+  // Extract unique collections from loaded searchIndex
+  const availableCollections = React.useMemo(() => {
+    const set = new Set(searchIndex.map((item) => item.collection).filter(Boolean));
+    return Array.from(set);
+  }, [searchIndex]);
 
   // Keyboard shortcut: Cmd/Ctrl + K
   React.useEffect(() => {
@@ -77,22 +84,18 @@ export function CommandPalette() {
     let results: SearchItem[];
 
     if (!searchQuery.trim()) {
-      // Show all items when no search query
       results = searchIndex;
     } else {
       const searchResults = fuseRef.current.search(searchQuery);
       results = searchResults.map((result) => result.item);
     }
 
-    // Apply filters with inverted logic
+    // Apply filters
     const filtered = results.filter((item) => {
-      // If no collection filters are active, show all collections
-      const hasCollectionFilter = filterDocs || filterFunnydocs;
-      const collectionMatch = hasCollectionFilter
-        ? (filterDocs && item.collection === "docs") || (filterFunnydocs && item.collection === "funnydocs")
-        : true;
+      // Collection filter: if none selected, show all
+      const collectionMatch = selectedCollections.length === 0 || selectedCollections.includes(item.collection);
 
-      // If no type filters are active, show all types
+      // Type filter: if none selected, show all
       const hasTypeFilter = filterPages || filterHeadings;
       const typeMatch = hasTypeFilter
         ? (filterPages && item.type === "page") || (filterHeadings && item.type === "heading")
@@ -102,7 +105,7 @@ export function CommandPalette() {
     });
 
     setFilteredResults(filtered.slice(0, 20));
-  }, [searchQuery, searchIndex, filterDocs, filterFunnydocs, filterPages, filterHeadings]);
+  }, [searchQuery, searchIndex, selectedCollections, filterPages, filterHeadings]);
 
   // Handle item selection
   const handleSelect = (url: string) => {
@@ -118,41 +121,53 @@ export function CommandPalette() {
     <CommandDialog
       open={open}
       onOpenChange={setOpen}
-      title="Search Documentation"
-      description="Search for pages and headings in the documentation"
+      title="Buscar Conocimiento"
+      description="Buscar notas, páginas y secciones en la documentación"
     >
-      <CommandInput placeholder="Search documentation..." value={searchQuery} onValueChange={setSearchQuery} />
+      <CommandInput placeholder="Buscar notas, secciones..." value={searchQuery} onValueChange={setSearchQuery} />
 
       {/* Filter toggles */}
       <div className="flex items-center gap-2 border-b px-3 py-2">
         <FilterIcon className="text-muted-foreground size-4" />
         <div className="flex flex-wrap items-center gap-1">
-          <Toggle size="sm" pressed={filterDocs} onPressedChange={setFilterDocs} aria-label="Filter docs">
-            Docs
+          {/* Dynamic collection filters: automatically appear when multiple collections exist */}
+          {availableCollections.length > 1 && (
+            <>
+              {availableCollections.map((col) => {
+                const isSelected = selectedCollections.includes(col);
+                return (
+                  <Toggle
+                    key={col}
+                    size="sm"
+                    pressed={isSelected}
+                    onPressedChange={(pressed) => {
+                      setSelectedCollections((prev) => (pressed ? [...prev, col] : prev.filter((c) => c !== col)));
+                    }}
+                    aria-label={`Filtrar ${col}`}
+                    className="capitalize text-xs"
+                  >
+                    {col}
+                  </Toggle>
+                );
+              })}
+              <div className="bg-border mx-1 h-6 w-px" />
+            </>
+          )}
+
+          <Toggle size="sm" pressed={filterPages} onPressedChange={setFilterPages} aria-label="Filtrar páginas">
+            Páginas
           </Toggle>
-          <Toggle
-            size="sm"
-            pressed={filterFunnydocs}
-            onPressedChange={setFilterFunnydocs}
-            aria-label="Filter funnydocs"
-          >
-            Funnydocs
-          </Toggle>
-          <div className="bg-border mx-1 h-6 w-px" />
-          <Toggle size="sm" pressed={filterPages} onPressedChange={setFilterPages} aria-label="Filter pages">
-            Pages
-          </Toggle>
-          <Toggle size="sm" pressed={filterHeadings} onPressedChange={setFilterHeadings} aria-label="Filter headings">
-            Headings
+          <Toggle size="sm" pressed={filterHeadings} onPressedChange={setFilterHeadings} aria-label="Filtrar secciones">
+            Secciones
           </Toggle>
         </div>
       </div>
 
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>No se encontraron resultados.</CommandEmpty>
 
         {pageResults.length > 0 && (
-          <CommandGroup heading="Pages">
+          <CommandGroup heading="Páginas">
             {pageResults.map((item) => {
               if (item.type !== "page") return null;
               return (
@@ -168,7 +183,9 @@ export function CommandPalette() {
                       <div className="text-muted-foreground line-clamp-1 text-xs">{item.description}</div>
                     )}
                   </div>
-                  <span className="text-muted-foreground ml-auto text-xs">{item.collection}</span>
+                  {availableCollections.length > 1 && (
+                    <span className="text-muted-foreground ml-auto text-xs capitalize">{item.collection}</span>
+                  )}
                 </CommandItem>
               );
             })}
@@ -176,7 +193,7 @@ export function CommandPalette() {
         )}
 
         {headingResults.length > 0 && (
-          <CommandGroup heading="Headings">
+          <CommandGroup heading="Secciones">
             {headingResults.map((item) => {
               if (item.type !== "heading") return null;
               return (
@@ -190,7 +207,9 @@ export function CommandPalette() {
                     <div className="font-medium">{item.headingText}</div>
                     <div className="text-muted-foreground text-xs">{item.pageTitle}</div>
                   </div>
-                  <span className="text-muted-foreground ml-auto text-xs">{item.collection}</span>
+                  {availableCollections.length > 1 && (
+                    <span className="text-muted-foreground ml-auto text-xs capitalize">{item.collection}</span>
+                  )}
                 </CommandItem>
               );
             })}

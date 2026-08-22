@@ -9,7 +9,8 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://celestialdocs.hyperoot.dev",
+  site: process.env.SITE || "https://yeriel.github.io",
+  base: process.env.BASE_PATH || undefined,
   prefetch: true,
   vite: {
     plugins: [tailwindcss()],

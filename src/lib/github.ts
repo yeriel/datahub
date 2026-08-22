@@ -45,7 +45,6 @@ export async function fetchStarCount(repo: string): Promise<number> {
     const response = await fetch(`https://api.github.com/repos/${repoPath}`, {
       headers: {
         Accept: "application/vnd.github.v3+json",
-        "User-Agent": "celestialdocs-site",
       },
     });
 

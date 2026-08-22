@@ -3,12 +3,12 @@ import { CONTENT } from "@data/config";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-// Reusable schema for all content systems
+// Reusable schema for all content systems with flexible defaults
 const createSchema = () =>
   z.object({
     // ===== Basic Metadata =====
-    title: z.string(),
-    description: z.string(),
+    title: z.string().optional().default("Sin título"),
+    description: z.string().optional().default(""),
     draft: z.boolean().optional().default(false),
     authors: z.array(z.string()).optional().default([]),
 
