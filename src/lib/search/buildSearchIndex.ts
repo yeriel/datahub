@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import { CONTENT } from "@data/config";
 
 import type { FrontmatterEntry } from "@/lib/docs/types";
+import { getSystemRoute } from "@/lib/resolveSystem";
 
 import type { SearchIndex, SearchItem } from "./types";
 
@@ -17,6 +18,7 @@ export async function buildSearchIndex(): Promise<SearchIndex> {
       // Get all entries from this collection
       const collectionId = sys.id as CollectionKey;
       const entries = (await getCollection(collectionId)) as FrontmatterEntry[];
+      const baseRoute = getSystemRoute(sys.id);
 
       for (const entry of entries) {
         // Add the page itself as a searchable item
@@ -26,7 +28,7 @@ export async function buildSearchIndex(): Promise<SearchIndex> {
           title: entry.data.title,
           description: entry.data.description,
           collection: sys.id,
-          url: `${sys.route}/${entry.id}`,
+          url: `${baseRoute}/${entry.id}`,
         });
 
         // Extract headings from the content
@@ -45,7 +47,7 @@ export async function buildSearchIndex(): Promise<SearchIndex> {
               headingText: heading.text,
               pageTitle: entry.data.title,
               collection: sys.id,
-              url: `${sys.route}/${entry.id}#${heading.slug}`,
+              url: `${baseRoute}/${entry.id}#${heading.slug}`,
               depth: heading.depth,
             });
           }

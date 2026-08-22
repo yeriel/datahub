@@ -22,12 +22,14 @@ export function resolveSystem(collectionId?: string): ContentSystem {
 }
 
 /**
- * Get the base route for a content system.
+ * Get the base route for a content system including Astro's BASE_URL.
  *
  * @param collectionId - The system ID (optional, defaults to "docs")
- * @returns The base route for the system (e.g., "/docs", "/notes")
+ * @returns The full base route for the system (e.g., "/datahub/docs", "/datahub/proyectos")
  */
 export function getSystemRoute(collectionId?: string): string {
   const system = resolveSystem(collectionId);
-  return system.route ?? `/${system.id}`;
+  const route = system.route ?? `/${system.id}`;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  return `${base}${route}`;
 }

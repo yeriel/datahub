@@ -2,6 +2,12 @@
 import { HEADER_NAV_ITEMS } from "@data/config";
 
 import { HeaderNavClient } from "./HeaderNav.client";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const navItems = HEADER_NAV_ITEMS.map((item) => ({
+  ...item,
+  href: item.href.startsWith("http") ? item.href : `${base}${item.href}`,
+}));
 ---
 
-<HeaderNavClient client:only="react" navItems={HEADER_NAV_ITEMS} />
+<HeaderNavClient client:only="react" navItems={navItems} />

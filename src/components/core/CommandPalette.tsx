@@ -62,7 +62,8 @@ export function CommandPalette() {
   // Load search index when dialog opens
   React.useEffect(() => {
     if (open && searchIndex.length === 0) {
-      fetch("/api/search-index.json")
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+      fetch(`${base}/api/search-index.json`)
         .then((res) => res.json())
         .then((data: SearchIndex) => {
           setSearchIndex(data.items);
